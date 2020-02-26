@@ -2,7 +2,7 @@ import tensorflow as tf
 
 def resnet(input_image):
 
-    with tf.variable_scope("generator"):
+    with tf.compat.v1.variable_scope("generator"):
 
         W1 = weight_variable([9, 9, 3, 64], name="W1"); b1 = bias_variable([64], name="b1");
         c1 = tf.nn.relu(conv2d(input_image, W1) + b1)
@@ -81,7 +81,7 @@ def adversarial(image_):
 
 def weight_variable(shape, name):
 
-    initial = tf.truncated_normal(shape, stddev=0.01)
+    initial = tf.random.truncated_normal(shape, stddev=0.01)
     return tf.Variable(initial, name=name)
 
 def bias_variable(shape, name):
